@@ -1,8 +1,9 @@
+import { DynamoPortafolioItemI, DynamoType, DynamoObjectI } from "../../types/dynamoTypes";
 
 //TODO: Add types
-export function mapItems(items: []): any[]{
+export function mapItems(items: DynamoPortafolioItemI[]): any[]{
 
-    return items.reduce((acc: any[], item) => {
+    return items.reduce((acc: any[], item: DynamoPortafolioItemI) => {
         const mapItem = mapByType(item);
         if(mapItem.visible){
             acc.push(mapItem)
@@ -13,20 +14,20 @@ export function mapItems(items: []): any[]{
 }
 
 
-function mapByType(item: any): any{
-    if(item instanceof Object === false) return item;
-    const newItem: any  = {};
 
-    for(let key of Object.keys(item)) {
+
+function mapByType(item: DynamoType | DynamoPortafolioItemI): any{
+    const newItem: any  = {};
+    for(let [key, value] of Object.entries(item)) {
         if(key === 'M'){
-            return mapByType(item[key])
-        } else if(key === 'L' && Array.isArray(item[key])) {
-            return item[key].map((x: any) => mapByType(x))
+            return mapByType(value)
+        } else if(key === 'L' && Array.isArray(value)) {
+            return value.map((x: DynamoObjectI) => mapByType(x))
         } else if(key === 'S' || key === 'BOOL') {
-            return item[key]
-        } else if(key === 'N') return parseInt(item[key]);
+            return value
+        } else if(key === 'N') return parseInt(value);
         
-        newItem[key] = mapByType(item[key]);
+        newItem[key] = mapByType(value);
     }
 
     return newItem;
