@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "client",
   "version": "0.0.0",
   "description": "",
   "main": "build/src/index.js",
@@ -18,12 +18,14 @@
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "posttest": "npm run check",
-    "server": "npm run compile && node build/src/index.js"
+    "server": "npm run compile && node build/src/index.js",
+    "devServer": "ts-node-dev --respawn --transpileOnly src/index.ts"
   },
   "devDependencies": {
+    "@types/node": "^10.0.3",
     "gts": "^1.1.2",
-    "typescript": "~3.7.0",
-    "@types/node": "^10.0.3"
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "~3.7.0"
   },
   "dependencies": {
     "@types/express": "^4.17.2",
