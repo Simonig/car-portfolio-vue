@@ -6,7 +6,7 @@ import { Application, Request, Response } from "express";
 
 const publicFolder = __dirname + '/../../build/public'
 
-async function downloadImage(url: string, imageName) {
+async function downloadImage(url: string, imageName: string) {
     if(Fs.existsSync(Path.join(publicFolder, 'img', imageName))){
         return;
     }

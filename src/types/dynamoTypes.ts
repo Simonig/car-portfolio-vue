@@ -15,32 +15,31 @@ export interface DynamoPortafolioItemI {
 }
 
 export interface DynamoStringI {
-    kind: "string";
     S: string;
 }
 
 export interface DynamoNumberI {
-    kind: "number";
     N: string;
 }
 
 export interface DynamoBoolI {
-    kind: "boolean";
     BOOL: boolean;
 }
 
 export interface DynamoObjectI {
-    kind: "object";
     M: DynamoObjectValueI
 }
 
 export interface DynamoArrayI {
-    kind: "array";
     L: DynamoObjectI[];
 }
 
-interface DynamoObjectValueI {
-    [key: string]: DynamoNumberI | DynamoBoolI | DynamoObjectI | DynamoStringI 
+export interface DynamoObjectValueI {
+    [key: string]: DynamoValue
 }
 
-export type DynamoType = DynamoArrayI | DynamoNumberI | DynamoStringI | DynamoObjectI | DynamoBoolI;
+type DynamoPrimitivValues = string | boolean | number
+
+export type DynamoValue = DynamoPrimitivValues | DynamoObjectValueI | DynamoPrimitivValues[];
+
+export type DynamoSubType = DynamoArrayI | DynamoNumberI | DynamoStringI | DynamoObjectI | DynamoBoolI;
