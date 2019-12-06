@@ -7,16 +7,14 @@
     </div>
     <div class="container page">
       <div class="row">
-          <router-view></router-view>
+        <router-view></router-view>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
-
 export default {
-  name: "home",
+  name: 'home',
 };
 </script>

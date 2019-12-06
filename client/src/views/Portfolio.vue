@@ -1,37 +1,34 @@
 <template>
   <div class="portfolio-container">
-    <div class="sidebar">
-        <h1 class="logo-font">sidebar</h1>
-    </div>
-    <div class="cards">
-      <car-list />
-    </div>
+    <filter-sidebar />
+    <car-list />
   </div>
 </template>
 
 <script>
-import CarList from '../components/CarList'
+import CarList from '../components/CarList';
+import FilterSidebar from '../components/FilterSidebar';
 
 export default {
-  name: "portfolio",
+  name: 'portfolio',
   components: {
-      CarList
-  }
+    CarList,
+    FilterSidebar,
+  },
 };
 </script>
 
 <style scooped>
 .portfolio-container {
-    display: flex;
+  display: flex;
 }
 .sidebar {
-    width: 400px;
-    padding: 30px;
-    text-align: center;
-    margin-top: 50px;
-    border-right: 1px #ddd solid;
+  width: 400px;
+  padding: 30px;
+  text-align: center;
+  margin-top: 50px;
+  border-right: 1px #ddd solid;
 }
 .cards {
-
 }
 </style>

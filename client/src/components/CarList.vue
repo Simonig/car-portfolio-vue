@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
     <p v-if="isLoading">Loading...</p>
     <div v-if="!isLoading">
       <car-card v-for="(car) in getCars" :car="car" :key="car.id" />
@@ -13,7 +13,7 @@ import CarCard from './CarCard.vue';
 import { FETCH_PORTFOLIO } from '../store/portfolio.module';
 
 export default {
-  name: 'app',
+  name: 'car-list',
   components: {
     CarCard,
   },
@@ -28,7 +28,6 @@ export default {
   mounted() {
     this.fetchCars();
   },
-
 };
 </script>
 
