@@ -26,10 +26,10 @@ export const SET_FILTER_VALUE = 'SET_FILTER_VALUE';
 export const SET_SORT_BY = 'SET_SORT_BY';
 export const RESET_FILTERS = 'RESET_FILTERS';
 const FETCH_START = 'FETCH_START';
-const SET_CARS = 'SET_CARS';
+const SET_PORTFOLIO_RESPONSE = 'SET_PORTFOLIO_RESPONSE';
 const FETCH_END = 'FETCH_END';
 
-function isValidType(item, type, valid = []) {
+function filterByType(item, type, valid = []) {
     return valid.length === 0 || valid.includes(item.car[type])
 }
 
@@ -38,8 +38,8 @@ const getters = {
         const filtredCars = state.cars.filter(car => {
             return car.pricing.price >= state.filters.minPrice
                 && car.pricing.price <= state.filters.maxPrice
-                && isValidType(car, 'make', state.filters.make)
-                && isValidType(car, 'fueltype', state.filters.fueltype);
+                && filterByType(car, 'make', state.filters.make)
+                && filterByType(car, 'fueltype', state.filters.fueltype);
         });
         return sortBy(filtredCars, state.sortBy);
     },
@@ -65,7 +65,7 @@ const actions = {
         commit(FETCH_START)
         const { data } = await ApiService.fetchPortfolio();
         commit(FETCH_END)
-        commit(SET_CARS, { ...data.data })
+        commit(SET_PORTFOLIO_RESPONSE, { ...data.data })
     },
     async [FETCH_CAR_BY_ID]({ commit }, id) {
         commit(FETCH_START)
@@ -91,7 +91,7 @@ const mutations = {
     [FETCH_END](state) {
         state.loading = false;
     },
-    [SET_CARS](state, { cars, maxPrice, minPrice, fuelType, make }) {
+    [SET_PORTFOLIO_RESPONSE](state, { cars, maxPrice, minPrice, fuelType, make }) {
         state.cars = cars;
         state.options.maxPrice = maxPrice;
         state.options.minPrice = minPrice;
