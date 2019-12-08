@@ -2,6 +2,8 @@ export interface PortfolioResponseI {
   cars: PortfolioItemI[];
   maxPrice: number;
   minPrice: number;
+  make: string[];
+  fuelType: string[];
 }
 
 export interface PortfolioItemI {
@@ -30,6 +32,10 @@ interface PricingI {
   bookableOptions: Array<{}>;
 }
 
+export interface FilterI {
+  [key: string]: boolean;
+}
+
 export type PortfolioSubItem = PortfolioItemI | TeaserI | CarI | EnviromentI;
 
 interface TeaserI {
@@ -44,7 +50,7 @@ interface EquipmentHightlightI {
 
 interface CarI {
   equipmentDetails?: EquipmentDetailI[];
-  fueltype?: string;
+  fueltype: string;
   ps?: number;
   offerExtColor?: string;
   gearingType?: string;
@@ -55,7 +61,7 @@ interface CarI {
   environment?: EnviromentI;
   model?: string;
   drive?: string;
-  make?: string;
+  make: string;
 }
 
 type EquipmentDetailI = EquipmentHightlightI;

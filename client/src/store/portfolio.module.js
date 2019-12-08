@@ -6,11 +6,18 @@ const state = {
     loading: false,
     filters: {
         minPrice: 0,
-        maxPrice: 2000
+        maxPrice: 2000,
+        make: [],
+        fueltype: [],
+    },
+    options: {
+        make: [],
+        fueltype: [],
+        maxPrice: 0,
+        minPrice: 0,
     },
     sortBy: 'priceAsc',
-    maxPrice: 0,
-    minPrice: 0,
+
 }
 
 export const FETCH_PORTFOLIO = 'FETCH_PORTFOLIO';
@@ -22,24 +29,31 @@ const FETCH_START = 'FETCH_START';
 const SET_CARS = 'SET_CARS';
 const FETCH_END = 'FETCH_END';
 
+function isValidType(item, type, valid = []) {
+    return valid.length === 0 || valid.includes(item.car[type])
+}
+
 const getters = {
     getCars(state) {
         const filtredCars = state.cars.filter(car => {
-            return car.pricing.price >= state.filters.minPrice && car.pricing.price <= state.filters.maxPrice;
+            return car.pricing.price >= state.filters.minPrice
+                && car.pricing.price <= state.filters.maxPrice
+                && isValidType(car, 'make', state.filters.make)
+                && isValidType(car, 'fueltype', state.filters.fueltype);
         });
         return sortBy(filtredCars, state.sortBy);
     },
     isLoading(state) {
         return state.loading
     },
-    maxPrice(state) {
-        return state.maxPrice;
-    },
     filters(state) {
         return state.filters;
     },
-    minPrice(state) {
-        return state.minPrice;
+    getFilterOptions(state) {
+        return (type) => state.options[type];
+    },
+    getFilterValue(state) {
+        return (type) => state.filters[type];
     },
     sortBy(state) {
         return state.sortBy;
@@ -72,15 +86,17 @@ const mutations = {
         state.sortBy = value;
     },
     [RESET_FILTERS](state) {
-        state.filters = { maxPrice: state.maxPrice, minPrice: state.minPrice };
+        state.filters = { maxPrice: state.options.maxPrice, minPrice: state.options.minPrice, make: [], fueltype: [] };
     },
     [FETCH_END](state) {
         state.loading = false;
     },
-    [SET_CARS](state, { cars, maxPrice, minPrice }) {
+    [SET_CARS](state, { cars, maxPrice, minPrice, fuelType, make }) {
         state.cars = cars;
-        state.maxPrice = maxPrice;
-        state.minPrice = minPrice;
+        state.options.maxPrice = maxPrice;
+        state.options.minPrice = minPrice;
+        state.options.make = make;
+        state.options.fueltype = fuelType;
         state.filters.maxPrice = maxPrice
         state.filters.minPrice = minPrice
     },

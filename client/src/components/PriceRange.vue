@@ -24,7 +24,13 @@ export default {
     VueSlider,
   },
   computed: {
-    ...mapGetters(['minPrice', 'maxPrice', 'filters']),
+    ...mapGetters(['filters']),
+    maxPrice() {
+      return this.$store.getters.getFilterOptions('maxPrice');
+    },
+    minPrice() {
+      return this.$store.getters.getFilterOptions('minPrice');
+    },
     priceRange: {
       get() {
         return [

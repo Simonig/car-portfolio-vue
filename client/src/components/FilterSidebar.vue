@@ -3,18 +3,23 @@
     <md-toolbar class="md-transparent" md-elevation="0">Filters</md-toolbar>
     <price-range></price-range>
     <sort-by></sort-by>
+    <filter-by filterBy="make" title="Filter by brand:"></filter-by>
+    <filter-by filterBy="fueltype" title="Filter by fuel type:"></filter-by>
+  
   </md-content>
 </template>
 
 <script>
 import PriceRange from './PriceRange';
 import SortBy from './SortBy';
+import FilterBy from './FilterBy';
 
 export default {
   name: 'filter-sidebar',
   components: {
     PriceRange,
     SortBy,
+    FilterBy,
   },
 };
 </script>
@@ -25,7 +30,6 @@ export default {
   background-color: white;
   padding: 20px;
   margin-left: 20px;
-  height: 600px;
   max-width: calc(100vw - 125px);
 }
 .md-toolbar {

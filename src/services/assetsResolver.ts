@@ -4,7 +4,7 @@ import { downloadAsset } from '../utils/downloadAsset';
 import { assetsFolder } from '../utils/paths';
 import { isSupportedType } from '../utils/isSupportedType';
 
-// Hacky solution to resolver images without enabling cors in the browser
+// Hacky solution to resolve images
 export async function assetsResolver(req: Request, res: Response) {
   if (isSupportedType(req.url)) {
     const assetUrl = req.url.replace('/assets/', 'https://assets.cluno.com/');
@@ -20,6 +20,6 @@ export async function assetsResolver(req: Request, res: Response) {
     }
   } else {
     res.status(403);
-    res.send({ error: `url not supported` });
+    res.send({ error: `not supported` });
   }
 }

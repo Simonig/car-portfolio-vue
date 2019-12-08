@@ -9,6 +9,7 @@ import {
   PortfolioSubItem,
   PortfolioItemI,
   PortfolioResponseI,
+  FilterI,
 } from '../types/portFolioItemTypes';
 import {
   subItemIsDynamoBoolean,
@@ -21,6 +22,8 @@ import {
 export function mapItems(items: DynamoObjectValueI[]): PortfolioResponseI {
   let maxPrice = 0;
   let minPrice = Infinity;
+  const brands: FilterI = {};
+  const fuelType: FilterI = {};
   const mappedItems: PortfolioItemI[] = items.reduce(
     (acc: PortfolioItemI[], item: DynamoObjectValueI) => {
       const mapItem: PortfolioSubItem = mapSubItems(item);
@@ -28,6 +31,10 @@ export function mapItems(items: DynamoObjectValueI[]): PortfolioResponseI {
         maxPrice = Math.max(mapItem.pricing.price, maxPrice);
         minPrice = Math.min(mapItem.pricing.price, minPrice);
         replaceImageUrl(mapItem);
+
+        brands[mapItem.car.make] = true;
+        fuelType[mapItem.car.fueltype] = true;
+
         acc.push(mapItem);
         return acc;
       }
@@ -36,7 +43,13 @@ export function mapItems(items: DynamoObjectValueI[]): PortfolioResponseI {
     []
   );
 
-  return { cars: mappedItems, maxPrice, minPrice };
+  return {
+    cars: mappedItems,
+    maxPrice,
+    minPrice,
+    make: Object.keys(brands),
+    fuelType: Object.keys(fuelType),
+  };
 }
 
 function mapSubItems(item: DynamoObjectValueI): DynamoObjectMappedI {
