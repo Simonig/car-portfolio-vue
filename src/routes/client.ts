@@ -4,7 +4,6 @@ import { Application, Request, Response } from 'express';
 import { publicFolder } from '../utils/paths';
 import { assetsResolver } from '../services/assetsResolver';
 
-
 export function clientRoute(app: Application) {
   app.use('/', express.static(publicFolder));
 

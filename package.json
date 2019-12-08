@@ -19,9 +19,10 @@
     "pretest": "npm run compile",
     "posttest": "npm run check",
     "copyStatic": "copyfiles assets/**.* ./build",
-    "buildClient": "npm run --prefix client build",
-    "build": "npm run copyStatic && npm run buildClient &&npm run compile",
-    "server": "npm run build && node build/src/index.js",
+    "buildClient": "npm --prefix client install && npm run --prefix client build",
+    "build": "npm run copyStatic && npm run buildClient && npm run compile",
+    "start" : "node build/src/index.js",
+    "server": "npm run build && npm run start",
     "devServer": "ts-node-dev --respawn --transpileOnly src/index.ts"
   },
   "devDependencies": {

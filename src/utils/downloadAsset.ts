@@ -1,10 +1,7 @@
 import fs from 'fs';
 import axios from 'axios';
 
-export async function downloadAsset(
-  url: string,
-  assetDest: string
-) {
+export async function downloadAsset(url: string, assetDest: string) {
   if (fs.existsSync(assetDest)) {
     return;
   }
