@@ -2,7 +2,7 @@
   <div class="home-page">
     <div class="banner">
       <div class="container">
-        <h1 class="logo-font">Portfolio</h1>
+        <h1 class="logo-font">Car Portfolio</h1>
       </div>
     </div>
     <div class="container page">
@@ -18,3 +18,8 @@ export default {
   name: 'home',
 };
 </script>
+<style scoped>
+h1 {
+  margin-left: 300px;
+}
+</style>

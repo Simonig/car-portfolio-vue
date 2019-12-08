@@ -2,15 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store';
 import router from './router'
-import { MdCard, MdList, MdApp, MdIcon, MdDrawer, MdToolbar, MdContent} from 'vue-material/dist/components';
+import VueMaterial from 'vue-material';
+import ApiService from './api.serivce';
 
-Vue.use(MdCard);
-Vue.use(MdList);
-Vue.use(MdApp);
-Vue.use(MdDrawer);
-Vue.use(MdIcon);
-Vue.use(MdToolbar);
-Vue.use(MdContent);
+Vue.use(VueMaterial);
+ApiService.init();
 
 Vue.config.productionTip = false
 

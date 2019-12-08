@@ -8,7 +8,8 @@
       <md-card-area>
         <md-card-header>
           <span class="md-title">{{car.teaser.title}}</span>
-          <span class="md-subhead">1/1 image</span>
+          <span class="md-subhead">{{formatCurrency(car.pricing.price)}} Monthly</span>
+          <span class="md-subhead">{{car.car.kw}} kW / {{car.car.ps}} PS</span>
         </md-card-header>
       </md-card-area>
     </md-card-media-cover>
@@ -16,6 +17,7 @@
 </template>
 
 <script>
+import { formatCurrency } from '../utils/formmater';
 
 export default {
   name: 'CardCar',
@@ -24,6 +26,9 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  methods: {
+    formatCurrency,
   },
 };
 </script>

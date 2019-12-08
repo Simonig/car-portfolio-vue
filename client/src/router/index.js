@@ -7,14 +7,16 @@ export default new Router({
     routes: [
         {
             path: "/",
-            component: () => import("../views/Home"),
-            children: [
-                {
-                    path: "",
-                    name: "portfolio",
-                    component: () => import("../views/Portfolio")
-                },
-            ]
-        }
+            name: "portfolio",
+            component: () => import("../views/Portfolio")
+        },
+        {
+            path: "/detail/:id",
+            name: "detail",
+            component: () => import("../views/Details"),
+            props: true,
+        },
     ]
-})
+}
+
+)

@@ -1,45 +1,48 @@
+export interface PortfolioJsonI {
+  Items: DynamoObjectValueI[];
+}
 
-export interface DynamoPortafolioItemI {
-    portafolio: DynamoStringI;
-    conditions: DynamoObjectI;
-    visible: DynamoBoolI;
-    car: DynamoObjectI;
-    available: DynamoBoolI;
-    detailUrl: DynamoStringI;
-    teaser: DynamoObjectI;
-    labels: DynamoArrayI;
-    segment: DynamoStringI;
-    images: DynamoArrayI;
-    id: DynamoStringI;
-    pricing: DynamoObjectI;
+export interface DynamoListI {
+  L: DynamoArrayItem[];
 }
 
 export interface DynamoStringI {
-    S: string;
+  S: string;
 }
 
 export interface DynamoNumberI {
-    N: string;
+  N: string;
 }
 
 export interface DynamoBoolI {
-    BOOL: boolean;
+  BOOL: boolean;
 }
 
 export interface DynamoObjectI {
-    M: DynamoObjectValueI
-}
-
-export interface DynamoArrayI {
-    L: DynamoObjectI[];
+  M: DynamoObjectValueI;
 }
 
 export interface DynamoObjectValueI {
-    [key: string]: DynamoValue
+  [key: string]: DynamoSubType;
 }
 
-type DynamoPrimitivValues = string | boolean | number
+export interface DynamoObjectMappedI {
+  [key: string]: MappedValue | MappedValue[];
+}
 
-export type DynamoValue = DynamoPrimitivValues | DynamoObjectValueI | DynamoPrimitivValues[];
+type DynamoArrayItem =
+  | DynamoNumberI
+  | DynamoStringI
+  | DynamoObjectI
+  | DynamoBoolI;
 
-export type DynamoSubType = DynamoArrayI | DynamoNumberI | DynamoStringI | DynamoObjectI | DynamoBoolI;
+export type DynamoSubType =
+  | DynamoListI
+  | DynamoNumberI
+  | DynamoStringI
+  | DynamoObjectI
+  | DynamoBoolI;
+
+export type PrimitivValues = string | boolean | number;
+export type ArrayI = DynamoObjectMappedI[] | PrimitivValues[];
+export type MappedValue = PrimitivValues | DynamoObjectMappedI | ArrayI;
