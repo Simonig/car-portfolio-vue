@@ -35,7 +35,7 @@
               <p>Gear type {{car.car.gearingType}}</p>
               <p>Doors {{car.car.doors}}</p>
             </div>
-            <h2>Price: {{car.pricing.price}}</h2>
+            <h2>Price: {{formatCurrency(car.pricing.price)}}</h2>
           </div>
         </div>
       </div>
@@ -46,6 +46,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import { FETCH_CAR_BY_ID } from '../store/portfolio.module';
+import { formatCurrency } from '../utils/formmater';
 
 export default {
   name: 'car-detail',
@@ -65,6 +66,7 @@ export default {
         .then(response => response.data.data);
       this.car = carResponse;
     },
+    formatCurrency,
   },
   mounted() {
     this.fetchCarById();

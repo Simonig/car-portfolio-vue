@@ -8,6 +8,11 @@ npm install
 npm run server
 ```
 
+## Run Tests
+```
+npm run test
+```
+
 ## Backend dependencies
 
 - [gts](https://github.com/google/gts): this project was initialized with gts, it provides linting configuration to enforce TS good practices.
@@ -33,3 +38,4 @@ For the client I used mostly the standard libraries to work with Vue
 - "/" Client application 
 - "/api/portfolio" return the list of cars, and details about maximum price and minimum price.
 - "/api/porfolio/:id" find a car item by id.
+- "assets/:asset-route" hacky solution for resolving image assets from different domains with cors not enabled, implementation is just for dev purpouse 
