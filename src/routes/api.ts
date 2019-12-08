@@ -1,8 +1,8 @@
 import { Application, Request, Response } from 'express';
-import { getCarsPortfolio } from '../services/getCarsPortfolio';
+import { initPortfolioService } from '../services/carsPortfolio.service';
 
 export function apiRoutes(app: Application) {
-  const portfolioService = getCarsPortfolio();
+  const portfolioService = initPortfolioService();
 
   app.get('/api/portfolio', (req: Request, res: Response) => {
     res.send({ data: portfolioService.getAll() });

@@ -1,7 +1,8 @@
 import { mapItems } from '../utils/mapPortfolioItems';
 import { DynamoObjectValueI, PortfolioJsonI } from '../types/dynamoTypes';
+import { PortfolioItemI } from '../types/portFolioItemTypes';
 
-export function getCarsPortfolio() {
+export function initPortfolioService() {
   const portfolio = require('../../assets/dynamodb.export.json') as PortfolioJsonI;
   const portfolioItems: DynamoObjectValueI[] = portfolio.Items;
   const portfolioReponse = mapItems(portfolioItems);
@@ -11,8 +12,8 @@ export function getCarsPortfolio() {
     getAll() {
       return portfolioReponse;
     },
-    getById(id: string) {
-      return portfolioReponse.cars.find(car => car.id === id);
+    getById(id: string): PortfolioItemI | null {
+      return portfolioReponse.cars.find(car => car.id === id) || null;
     },
   };
 }
