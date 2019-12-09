@@ -17,6 +17,7 @@ import {
   subItemIsDynamoString,
   subItemIsDynamoObject,
   subItemIsDynamoNumber,
+  portfolioSubItemIsPortfolioItem,
 } from './dynamoTypeCheckers';
 
 export function mapItems(items: DynamoObjectValueI[]): PortfolioResponseI {
@@ -87,15 +88,4 @@ function replaceImageUrl(item: PortfolioItemI): PortfolioItemI {
     '/assets/'
   );
   return item;
-}
-
-function portfolioSubItemIsPortfolioItem(
-  subItem: PortfolioSubItem
-): subItem is PortfolioItemI {
-  return (
-    (subItem as PortfolioItemI).portfolio !== undefined &&
-    (subItem as PortfolioItemI).car !== undefined &&
-    (subItem as PortfolioItemI).teaser !== undefined &&
-    (subItem as PortfolioItemI).pricing !== undefined
-  );
 }

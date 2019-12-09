@@ -6,6 +6,7 @@ import {
   DynamoBoolI,
   DynamoListI,
 } from '../types/dynamoTypes';
+import { PortfolioItemI, PortfolioSubItem } from '../types/portFolioItemTypes';
 
 export function subItemIsDynamoObject(
   subItem: DynamoSubType
@@ -35,4 +36,15 @@ export function subItemIsDynamoBoolean(
   subItem: DynamoSubType
 ): subItem is DynamoBoolI {
   return (subItem as DynamoBoolI).BOOL !== undefined;
+}
+
+export function portfolioSubItemIsPortfolioItem(
+  subItem: PortfolioSubItem
+): subItem is PortfolioItemI {
+  return (
+    (subItem as PortfolioItemI).portfolio !== undefined &&
+    (subItem as PortfolioItemI).car !== undefined &&
+    (subItem as PortfolioItemI).teaser !== undefined &&
+    (subItem as PortfolioItemI).pricing !== undefined
+  );
 }

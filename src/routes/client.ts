@@ -2,7 +2,7 @@ import express from 'express';
 import Path from 'path';
 import { Application, Request, Response } from 'express';
 import { publicFolder } from '../utils/paths';
-import { assetsResolver } from '../services/assetsResolver';
+import { assetsResolver } from '../services/assets.service';
 
 export function clientRoute(app: Application) {
   app.use('/', express.static(publicFolder));
